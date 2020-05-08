@@ -1,4 +1,4 @@
-# Call of Cthulhu RPG webapp creted in flutter
+# Call of Cthulhu RPG webapp created using Flutter and Flask
 
 This project will be based on [Chaosium: Call of Cthulhu RPG](https://www.chaosium.com/call-of-cthulhu-rpg/) official documentation. All RPG content is reserved to them.
 

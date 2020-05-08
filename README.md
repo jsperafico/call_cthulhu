@@ -57,7 +57,11 @@ Add a file `docker-compose.yml`, on `$DART_DEVCONTAINER$` folder, with content:
 version: "3"
 services:
     workspace_dart:
-        build: .
+        build:
+            context: .
+            network: host
+        ports:
+            - 5037:5037
         volumes:
             - ../../../workspace/dart:/workspace
         command: sleep infinity
@@ -90,6 +94,7 @@ RUN apt-get update \
 
 ENV ANDROID_HOME /usr/local/android
 ENV ANDROID_COMPILE_SDK 29
+ENV ANDROID_BUILD_TOOLS "29.0.3"
 ENV SDK_TOOLS 6200805_latest
 
 RUN mkdir "${ANDROID_HOME}" && \
@@ -102,11 +107,13 @@ RUN unzip commandlinetools-linux-${SDK_TOOLS}.zip && \
     rm commandlinetools-linux-${SDK_TOOLS}.zip && \
     chmod -R +x tools/bin
 
-ENV PATH="${PATH}":"${ANDROID_HOME}/tools/bin"
+ENV PATH="${PATH}":"${ANDROID_HOME}/tools/bin":"${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}":"${ANDROID_HOME}/platform-tools"
 
 RUN yes | sdkmanager --update --sdk_root=${ANDROID_HOME}
+RUN yes | sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
+RUN yes | sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+RUN yes | sdkmanager --update --sdk_root=${ANDROID_HOME}
 RUN yes | sdkmanager --licenses --sdk_root=${ANDROID_HOME}
-RUN sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
 
 WORKDIR /flutter
 ADD https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_1.17.0-stable.tar.xz .
@@ -121,3 +128,24 @@ ENV DEBIAN_FRONTEND=dialog
 ```
 
 You can start a DevContainer from folder `$DART_DEVCONTAINER$`, if further help with **Visual Studio Code DevContainers**, please check [Official Documentation](https://code.visualstudio.com/docs/remote/containers).
+
+## How to connect your Android Device from DevContainer
+
+Please, look at [Blog Codemagic](https://blog.codemagic.io/how-to-dockerize-flutter-apps/) solution depending on your Operating System.
+
+If you are using Windows Machine with Linux Containers, you will need ADB installed on your Windows and make a bridge between ADB Linux to Windows. So what you need is:
+1) Download [Platform Tools from Google](https://developer.android.com/studio/releases/platform-tools)
+2) Extract adb on your Machine (Recommended: `C:\android`)
+3) Add to `PATH` system variable `C:\android\platform-tools`
+4) Plug you Device on USB port
+5) Open Command Prompt
+6) Type: `adb tcpip 5555`
+7) Authorize debugging on your Mobile Device
+8) Type: `adb connect {Your device ip address}:5555`
+9) On this DevContainer, type: `adb connect {Your device ip address}:5555`
+10) Authorize debugging on your Mobile Device
+
+If you are using Linux Machine, it should work fine just by sharing you usb folder as usual. On `devcontainer.json` please add:
+```
+"runArgs": ["--privileged", "-v", "/dev/bus/usb:/dev/bus/usb"]
+```

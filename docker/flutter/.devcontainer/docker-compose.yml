@@ -5,5 +5,5 @@ services:
             context: .
             network: host
         volumes:
-            - ../../../call_cthulhu_app:/workspace
+            - ../../..:/workspace
         command: sleep infinity

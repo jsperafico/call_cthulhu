@@ -1,0 +1,9 @@
+version: "3.4"
+services:
+    workspace_flutter:
+        build:
+            context: .
+            network: host
+        volumes:
+            - ../../../call_cthulhu_app:/workspace
+        command: sleep infinity

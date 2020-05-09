@@ -1,0 +1,17 @@
+{
+	"name": "Flutter",
+	"dockerComposeFile": ["docker-compose.yml"],
+	"service": "workspace_flutter",
+	"workspaceFolder": "/workspace",
+
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	"extensions": [
+		"dart-code.dart-code",
+		"dart-code.flutter"
+	],
+	"forwardPorts": [5037],
+	"postCreateCommand": "flutter doctor",
+}

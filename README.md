@@ -13,4 +13,4 @@ Specific information about how to use the webapp, consult [Github: Wiki](https:/
 ## How to contribute with this project?
 
 Please, clone this repository on you machine.
-Once that done, is highly recommeded to read [Flutter DevContainer Documentation](https://)
+Once that done, is highly recommeded to read [Flutter DevContainer Documentation](flutter/README.md)

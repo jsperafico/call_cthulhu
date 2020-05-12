@@ -1,0 +1,8 @@
+enum MenuEnum {
+  DASHBOARD,
+  PROFILE,
+  SESSIONS,
+  INVESTIGATORS,
+  SETTINGS,
+  ABOUT
+}

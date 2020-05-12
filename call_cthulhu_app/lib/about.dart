@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
 class AboutWidget extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
-    return AboutState();
+    return _AboutState();
   }
 }
 
-class AboutState extends State<AboutWidget> {
-
+class _AboutState extends State<AboutWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Container(
-          height: 100,
-          width: 100,
-          color: Colors.red,
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          child: Container(
+            height: 100,
+            width: 100,
+            color: Colors.red,
+          ),
         ),
-        Text('Please use the following channels to comunicate with us and know more about this project:'),
+        Text('If you want to know how can you contribute with this project or wanna report some issue, please do it:'),
         Text('Github Wiki'),
         Text('Github Issues'),
         Text('Github Projects'),

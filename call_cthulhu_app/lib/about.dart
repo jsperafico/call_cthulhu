@@ -14,7 +14,11 @@ class AboutState extends State<AboutWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Cthulhu Icon'),
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.red,
+        ),
         Text('Please use the following channels to comunicate with us and know more about this project:'),
         Text('Github Wiki'),
         Text('Github Issues'),

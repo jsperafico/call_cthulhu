@@ -21,21 +21,18 @@ class MainState extends State<CallOfCthulhuApp> {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Call of Cthulhu RPG',
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Call of Cthulhu RPG',
+            ),
+            // bottom: TabWidget.createTabBar(),
           ),
-          // bottom: TabWidget.createTabBar(),
+          drawer: MenuWidget(),
+          body: AboutWidget(),
         ),
-        drawer: MenuWidget(),
-        body: AboutWidget(),
-      ),
+      )
     );
   }
 }
-
-//App bar
-//Tab content
-//About Page
-//Showcase Page

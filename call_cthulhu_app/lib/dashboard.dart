@@ -1,5 +1,8 @@
+import 'package:call_cthulhu_app/calendar/calendar.dart';
+import 'package:call_cthulhu_app/carousel/carousel.dart';
+import 'package:call_cthulhu_app/session/live_card.dart';
+import 'package:call_cthulhu_app/session/session_card.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class DashboardWidget extends StatefulWidget {
   @override
@@ -9,89 +12,44 @@ class DashboardWidget extends StatefulWidget {
 }
 
 class _DashboardState extends State<DashboardWidget> {
+  var sessionsCards = [
+    SessionCard(
+      texts: [
+        'Super Session Room',
+        'Keeper demands your attention on...',
+        'Pick Date and time for next session...'
+      ],
+    ),
+    SessionCard(
+      texts: [
+        'Amazing Session Room',
+        'Investigator\'s demands your attention on...',
+        'You got an item, please check your inventory...'
+      ],
+    ),
+    SessionCard(
+      texts: [
+        'Lazy Session Room',
+        'Keeper\'s demands your attention on...',
+        'Your Investigator has no Backstory.'
+      ],
+    ),
+  ];
+
   Widget _portrait(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: Container(
-            width: double.infinity,
-            child: Card(
-              elevation: 5,
-              child: Column(
-                children: <Widget>[
-                  Text('Live Section.'),
-                  Icon(
-                    Icons.camera_enhance,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        Container(
+          width: double.infinity,
+          child: LiveCard(),
         ),
-        Flexible(
-          flex: 1,
-          child: CarouselSlider(
-            options: CarouselOptions(
-              autoPlay: false,
-              enableInfiniteScroll: true,
-              reverse: false,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Super Session Room'),
-                      Text('Keeper demands your attention on...'),
-                      Text('Pick Date and time for next session...'),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Amazing Session Room'),
-                      Text('Investigator\'s demands your attention on...'),
-                      Text('You got an item, please check your inventory...'),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Lazy Session Room'),
-                      Text('Keeper\'s demands your attention on...'),
-                      Text('Your Investigator has no Backstory.'),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+        Carousel(
+          items: sessionsCards,
         ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            width: double.infinity,
-            child: Card(
-              elevation: 5,
-              child: Text('Calendar with upcoming sessions.'),
-            ),
-          ),
+        Container(
+          width: double.infinity,
+          child: Calendar(),
         ),
       ],
     );
@@ -99,78 +57,17 @@ class _DashboardState extends State<DashboardWidget> {
 
   Widget _landscape(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: CarouselSlider(
-            options: CarouselOptions(
-                autoPlay: false,
-                enableInfiniteScroll: true,
-                reverse: false,
-                scrollDirection: Axis.vertical),
-            items: <Widget>[
-              Container(
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Super Session Room'),
-                      Text('Keeper demands your attention on...'),
-                      Text('Pick Date and time for next session...'),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Amazing Session Room'),
-                      Text('Investigator\'s demands your attention on...'),
-                      Text('You got an item, please check your inventory...'),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Lazy Session Room'),
-                      Text('Keeper\'s demands your attention on...'),
-                      Text('Your Investigator has no Backstory.'),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+        Carousel(
+          items: sessionsCards,
         ),
-        Flexible(
-          flex: 1,
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Card(
-                  elevation: 5,
-                  child: Column(
-                    children: <Widget>[
-                      Text('Live Section.'),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 5,
-                  child: Text('Calendar with upcoming sessions.'),
-                ),
-              ),
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            LiveCard(),
+            Calendar(),
+          ],
         ),
       ],
     );

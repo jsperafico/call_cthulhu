@@ -1,5 +1,6 @@
 import 'package:call_cthulhu_app/dashboard.dart';
 import 'package:call_cthulhu_app/enum/menu.dart';
+import 'package:call_cthulhu_app/login.dart';
 import 'package:call_cthulhu_app/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:call_cthulhu_app/about.dart';
@@ -13,6 +14,10 @@ class CallOfCthulhuApp extends StatefulWidget {
     _appState._changeMenu(value);
   }
 
+  static login() {
+    _appState._login();
+  }
+
   @override
   State<StatefulWidget> createState() {
     return CallOfCthulhuApp._appState;
@@ -21,10 +26,18 @@ class CallOfCthulhuApp extends StatefulWidget {
 
 class MainState extends State<CallOfCthulhuApp> {
   MenuEnum _selectedMenu = MenuEnum.DASHBOARD;
+  bool _logedAsGuest = false;
 
   void _changeMenu(MenuEnum value) {
     setState(() {
       _selectedMenu = value;
+    });
+  }
+
+  void _login() {
+    setState(() {
+      _logedAsGuest = true;
+      _selectedMenu = MenuEnum.DASHBOARD;
     });
   }
 
@@ -57,10 +70,9 @@ class MainState extends State<CallOfCthulhuApp> {
               title: Text(
                 'Call of Cthulhu RPG',
               ),
-              // bottom: TabWidget.createTabBar(),
             ),
-            drawer: MenuWidget(),
-            body: _getCorrectBodyConsideringMenu(),
+            drawer: _logedAsGuest ? MenuWidget() : null,
+            body: _logedAsGuest ? _getCorrectBodyConsideringMenu() : LoginWidget(),
           ),
         ));
   }

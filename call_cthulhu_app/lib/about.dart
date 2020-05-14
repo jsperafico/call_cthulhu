@@ -9,6 +9,21 @@ class AboutWidget extends StatefulWidget {
 }
 
 class _AboutState extends State<AboutWidget> {
+  List<Widget> gitButtons = [
+    UrlButton(
+      label: 'Github Wiki',
+      url: 'https://github.com/jsperafico/call_cthulhu/wiki',
+    ),
+    UrlButton(
+      label: 'Github Issues',
+      url: 'https://github.com/jsperafico/call_cthulhu/issues',
+    ),
+    UrlButton(
+      label: 'Github Projects',
+      url: 'https://github.com/jsperafico/call_cthulhu/projects',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,22 +39,14 @@ class _AboutState extends State<AboutWidget> {
         ),
         Text(
             'If you want to know how can you contribute with this project or wanna report some issue, please do it:'),
-        Column(
-          children: <Widget>[
-            UrlButton(
-              label: 'Github Wiki',
-              url: 'https://github.com/jsperafico/call_cthulhu/wiki',
-            ),
-            UrlButton(
-              label: 'Github Issues',
-              url: 'https://github.com/jsperafico/call_cthulhu/issues',
-            ),
-            UrlButton(
-              label: 'Github Projects',
-              url: 'https://github.com/jsperafico/call_cthulhu/projects',
-            ),
-          ],
-        ),
+        MediaQuery.of(context).orientation == Orientation.portrait
+            ? Column(
+                children: this.gitButtons,
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: this.gitButtons,
+              ),
         Text('Thank you for using this application.'),
         Text('Add copyright things and licensing.'),
       ],

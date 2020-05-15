@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SessionCard extends StatelessWidget {
-  final List<String> texts;
+  final List<Object> texts;
 
   SessionCard({this.texts});
 
@@ -10,7 +11,13 @@ class SessionCard extends StatelessWidget {
     return Card(
       elevation: 5,
       child: Column(
-        children: texts.map((element) { return Text(element); }).toList(),
+        children: texts.map((element) {
+          if (element is String) {
+            return Text(element);
+          } else if(element is DateTime) {
+            return Text(DateFormat('dd/MM/yyyy Hm').format(element));
+          }
+        }).toList(),
       ),
     );
   }

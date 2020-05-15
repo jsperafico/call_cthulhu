@@ -1,7 +1,7 @@
 import 'package:call_cthulhu_app/calendar/calendar.dart';
 import 'package:call_cthulhu_app/carousel/carousel.dart';
+import 'package:call_cthulhu_app/main.dart';
 import 'package:call_cthulhu_app/session/live_card.dart';
-import 'package:call_cthulhu_app/session/session_card.dart';
 import 'package:flutter/material.dart';
 
 class DashboardWidget extends StatefulWidget {
@@ -12,30 +12,6 @@ class DashboardWidget extends StatefulWidget {
 }
 
 class _DashboardState extends State<DashboardWidget> {
-  var sessionsCards = [
-    SessionCard(
-      texts: [
-        'Super Session Room',
-        'Keeper demands your attention on...',
-        'Pick Date and time for next session...'
-      ],
-    ),
-    SessionCard(
-      texts: [
-        'Amazing Session Room',
-        'Investigator\'s demands your attention on...',
-        'You got an item, please check your inventory...'
-      ],
-    ),
-    SessionCard(
-      texts: [
-        'Lazy Session Room',
-        'Keeper\'s demands your attention on...',
-        'Your Investigator has no Backstory.'
-      ],
-    ),
-  ];
-
   Widget _portrait(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,7 +21,7 @@ class _DashboardState extends State<DashboardWidget> {
           child: LiveCard(),
         ),
         Carousel(
-          items: sessionsCards,
+          items: CallOfCthulhuApp.sessionsCards.sublist(0, 3),
         ),
         Container(
           width: double.infinity,
@@ -60,7 +36,7 @@ class _DashboardState extends State<DashboardWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Carousel(
-          items: sessionsCards,
+          items: CallOfCthulhuApp.sessionsCards,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

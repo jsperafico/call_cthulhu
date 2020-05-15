@@ -45,10 +45,10 @@ RUN yes | sdkmanager --update --sdk_root=${ANDROID_HOME}
 RUN yes | sdkmanager --licenses --sdk_root=${ANDROID_HOME}
 
 WORKDIR /flutter
-ADD https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_1.17.0-stable.tar.xz .
+ADD https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_1.17.1-stable.tar.xz .
 RUN cd /flutter \
-    && tar xf flutter_linux_1.17.0-stable.tar.xz \
-    && rm flutter_linux_1.17.0-stable.tar.xz \
+    && tar xf flutter_linux_1.17.1-stable.tar.xz \
+    && rm flutter_linux_1.17.1-stable.tar.xz \
     && flutter precache
 
 WORKDIR /workspace

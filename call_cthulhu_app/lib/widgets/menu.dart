@@ -1,7 +1,10 @@
 import 'package:call_cthulhu_app/enum/menu.dart';
 import 'package:call_cthulhu_app/widgets/about/about.dart';
 import 'package:call_cthulhu_app/widgets/dashboard/dashboard.dart';
+import 'package:call_cthulhu_app/widgets/investigators/investigators.dart';
+import 'package:call_cthulhu_app/widgets/profile/profile.dart';
 import 'package:call_cthulhu_app/widgets/session/sessions.dart';
+import 'package:call_cthulhu_app/widgets/settings/settings.dart';
 import 'package:flutter/material.dart';
 
 class MenuWidget extends StatelessWidget {
@@ -12,11 +15,17 @@ class MenuWidget extends StatelessWidget {
 
     switch (value) {
       case MenuEnum.PROFILE:
+        toOpen = ProfileWidget();
+        break;
       case MenuEnum.SESSIONS:
         toOpen = SessionsWidget();
         break;
       case MenuEnum.INVESTIGATORS:
+        toOpen = InvestigatorsWidget();
+        break;
       case MenuEnum.SETTINGS:
+        toOpen = SettingsWidget();
+        break;
       case MenuEnum.ABOUT:
         toOpen = AboutWidget();
         break;

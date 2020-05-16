@@ -53,10 +53,16 @@ class SessionsWidget extends StatelessWidget {
     );
   }
 
+  var _appBar = AppBar(
+    title: Text(
+      'Sessions',
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WelcomeApp.appBar,
+      appBar: _appBar,
       drawer: WelcomeApp.drawer,
       body: ListView(
         scrollDirection: Axis.vertical,
@@ -79,7 +85,7 @@ class SessionsWidget extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
-        tooltip: 'Increment Counter',
+        tooltip: 'Add Session',
         child: const Icon(Icons.add),
       ),
     );

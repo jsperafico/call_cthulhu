@@ -25,10 +25,16 @@ class _AboutState extends State<AboutWidget> {
     ),
   ];
 
+  var _appBar = AppBar(
+    title: Text(
+      'About',
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WelcomeApp.appBar,
+      appBar: _appBar,
       drawer: WelcomeApp.drawer,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

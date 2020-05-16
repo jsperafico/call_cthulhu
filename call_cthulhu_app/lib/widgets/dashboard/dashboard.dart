@@ -19,6 +19,7 @@ class _DashboardState extends State<DashboardWidget> {
   Widget _portrait(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
           width: double.infinity,

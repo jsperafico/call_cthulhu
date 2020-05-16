@@ -38,7 +38,7 @@ class InvestigatorsWidget extends StatelessWidget {
     );
   }
 
-  var _appBar = AppBar(
+  final AppBar _appBar = AppBar(
     title: Text(
       'Investigators',
     ),

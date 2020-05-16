@@ -53,7 +53,7 @@ class SessionsWidget extends StatelessWidget {
     );
   }
 
-  var _appBar = AppBar(
+  final AppBar _appBar = AppBar(
     title: Text(
       'Sessions',
     ),

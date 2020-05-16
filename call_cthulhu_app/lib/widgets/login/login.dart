@@ -1,5 +1,5 @@
-import 'package:call_cthulhu_app/button/url_button.dart';
-import 'package:call_cthulhu_app/main.dart';
+import 'package:call_cthulhu_app/widgets/components/button/url_button.dart';
+import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -35,7 +35,14 @@ class LoginWidget extends StatelessWidget {
               ),
               RaisedButton(
                 child: Text('Login as Guest'),
-                onPressed: CallOfCthulhuApp.login,
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => WelcomeApp(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

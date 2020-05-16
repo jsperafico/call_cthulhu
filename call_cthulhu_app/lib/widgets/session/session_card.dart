@@ -12,11 +12,10 @@ class SessionCard extends StatelessWidget {
       elevation: 5,
       child: Column(
         children: texts.map((element) {
-          if (element is String) {
-            return Text(element);
-          } else if(element is DateTime) {
+          if(element is DateTime) {
             return Text(DateFormat('dd/MM/yyyy Hm').format(element));
           }
+           return Text(element);
         }).toList(),
       ),
     );

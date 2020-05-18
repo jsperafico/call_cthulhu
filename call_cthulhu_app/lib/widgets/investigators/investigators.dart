@@ -7,65 +7,79 @@ class InvestigatorsWidget extends StatelessWidget {
   final nameController = TextEditingController();
   final userController = TextEditingController();
 
-  _form() {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-              ),
-              controller: this.nameController,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'User',
-              ),
-              controller: this.userController,
-            ),
-            RaisedButton(
-              child: Text('Add'),
-              onPressed: () {
-                print('${nameController.text} - ${userController.text}');
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+  var _listInvestigatorsMarcieli;
+
+  InvestigatorsWidget() {
+    _listInvestigatorsMarcieli = Api.investigatorsModel
+        .where((element) => element.user.name == 'Marcieli')
+        .toList();
   }
 
-  final AppBar _appBar = AppBar(
-    title: Text(
-      'Investigators',
-    ),
-  );
+  void _openModalNewInvestigator(BuildContext conext) {
+    showModalBottomSheet(context: conext, builder: (_) {
+      return Card(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
+                controller: this.nameController,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'User',
+                ),
+                controller: this.userController,
+              ),
+              RaisedButton(
+                child: Text('Add'),
+                onPressed: () {
+                  print('${nameController.text} - ${userController.text}');
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar,
+      appBar: AppBar(
+        title: Text(
+          'Investigators',
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () => _openModalNewInvestigator(context),
+          ),
+        ],
+      ),
       drawer: WelcomeApp.drawer,
-      body: ListView(
-        scrollDirection: Axis.vertical,
+      body: Column(
         children: <Widget>[
-          _form(),
-          Column(
-            children: Api.investigatorsModel
-                .where((element) => element.user.name == 'Marcieli')
-                .map((element) {
-              return SessionCard(
-                texts: [element.name],
-              );
-            }).toList(),
+          Flexible(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return SessionCard(
+                  texts: [_listInvestigatorsMarcieli[index].name],
+                );
+              },
+              itemCount: _listInvestigatorsMarcieli.length,
+            ),
+            flex: 1,
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () => _openModalNewInvestigator(context),
         tooltip: 'Add Investigator',
         child: const Icon(Icons.add),
       ),

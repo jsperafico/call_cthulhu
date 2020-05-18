@@ -9,68 +9,67 @@ class SessionsWidget extends StatelessWidget {
   final descriptionController = TextEditingController();
   final datetimeController = TextEditingController();
 
-  _form() {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Title',
-              ),
-              controller: this.titleController,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Users',
-              ),
-              controller: this.usersController,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Description',
-              ),
-              controller: this.descriptionController,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Datetime',
-              ),
-              controller: this.datetimeController,
-            ),
-            RaisedButton(
-              child: Text('Add'),
-              onPressed: () {
-                print(
-                    '${titleController.text} - ${descriptionController.text} - ${datetimeController.text}');
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   final AppBar _appBar = AppBar(
     title: Text(
       'Sessions',
     ),
   );
 
+  void _openModalNewSession(BuildContext context) {
+    showModalBottomSheet(context: context, builder: (ctx) {
+      return Card(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Title',
+                ),
+                controller: this.titleController,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Users',
+                ),
+                controller: this.usersController,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                ),
+                controller: this.descriptionController,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Datetime',
+                ),
+                controller: this.datetimeController,
+              ),
+              RaisedButton(
+                child: Text('Add'),
+                onPressed: () {
+                  print(
+                      '${titleController.text} - ${descriptionController.text} - ${datetimeController.text}');
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
       drawer: WelcomeApp.drawer,
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          _form(),
-          Column(
-            children: Api.sessionsModel.map((element) {
-              return SessionCard(
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          var element = Api.sessionsModel[index];
+          return SessionCard(
                 texts: [
                   'Title: ${element.title}',
                   'Description: ${element.description}',
@@ -79,12 +78,11 @@ class SessionsWidget extends StatelessWidget {
                   element.investigators.map((e) => e.name).toList().toString(),
                 ],
               );
-            }).toList(),
-          ),
-        ],
+        },
+        itemCount: Api.sessionsModel.length,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () => _openModalNewSession(context),
         tooltip: 'Add Session',
         child: const Icon(Icons.add),
       ),

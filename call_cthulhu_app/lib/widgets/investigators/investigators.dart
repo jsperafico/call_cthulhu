@@ -1,4 +1,5 @@
 import 'package:call_cthulhu_app/models/api.dart';
+import 'package:call_cthulhu_app/models/session/investigator_model.dart';
 import 'package:call_cthulhu_app/widgets/session/session_card.dart';
 import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,8 @@ class InvestigatorsWidget extends StatelessWidget {
   final nameController = TextEditingController();
   final userController = TextEditingController();
 
-  var _listInvestigatorsMarcieli;
-
-  InvestigatorsWidget() {
-    _listInvestigatorsMarcieli = Api.investigatorsModel
+  List<InvestigatorModel> get marcieliInvestigators {
+    return Api.investigatorsModel
         .where((element) => element.user.name == 'Marcieli')
         .toList();
   }
@@ -69,10 +68,10 @@ class InvestigatorsWidget extends StatelessWidget {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return SessionCard(
-                  texts: [_listInvestigatorsMarcieli[index].name],
+                  texts: [this.marcieliInvestigators[index].name],
                 );
               },
-              itemCount: _listInvestigatorsMarcieli.length,
+              itemCount: this.marcieliInvestigators.length,
             ),
             flex: 1,
           ),

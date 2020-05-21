@@ -14,3 +14,13 @@ Specific information about how to use the webapp, consult [Github: Wiki](https:/
 
 Please, clone this repository on you machine.
 Once that done, is highly recommeded to read [Flutter DevContainer Documentation](docker/README.md)
+
+## Screenshots of the App
+
+![Login Screen](screenshots/login.png){:height="25%" width="25%"}
+![Dashboad Screen](screenshots/dashboard.png){:height="25%" width="25%"}
+![Drawer Screen](screenshots/drawer.png){:height="25%" width="25%"}
+![Profile Screen](screenshots/profile.png){:height="25%" width="25%"}
+![Sessions Screen](screenshots/sessions.png){:height="25%" width="25%"}
+![Settings Screen](screenshots/settings.png){:height="25%" width="25%"}
+![About Screen](screenshots/about.png){:height="25%" width="25%"}

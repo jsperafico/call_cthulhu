@@ -14,7 +14,7 @@ class Carousel extends StatelessWidget {
         : Flexible(
             flex: 1,
             child: Column(
-              children: items.sublist(0,2),
+              children: items.sublist(0, 2),
             ),
           );
   }

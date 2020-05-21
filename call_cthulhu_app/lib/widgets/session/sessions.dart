@@ -69,15 +69,7 @@ class SessionsWidget extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) {
           var element = Api.sessionsModel[index];
-          return SessionCard(
-                texts: [
-                  'Title: ${element.title}',
-                  'Description: ${element.description}',
-                  'Keeper: ${element.keeper.name}',
-                  'Investigators: ',
-                  element.investigators.map((e) => e.name).toList().toString(),
-                ],
-              );
+          return SessionCard(element);
         },
         itemCount: Api.sessionsModel.length,
       ),

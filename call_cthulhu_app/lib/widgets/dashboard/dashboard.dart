@@ -1,10 +1,8 @@
 import 'package:call_cthulhu_app/models/api.dart';
-import 'package:call_cthulhu_app/models/session/investigator_model.dart';
-import 'package:call_cthulhu_app/models/session/user_model.dart';
 import 'package:call_cthulhu_app/widgets/components/calendar/calendar.dart';
 import 'package:call_cthulhu_app/widgets/components/carousel/carousel.dart';
+import 'package:call_cthulhu_app/widgets/dashboard/session_notifier.dart';
 import 'package:call_cthulhu_app/widgets/session/live_card.dart';
-import 'package:call_cthulhu_app/widgets/session/session_card.dart';
 import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -27,17 +25,7 @@ class _DashboardState extends State<DashboardWidget> {
         ),
         Carousel(
           items: Api.sessionsNotifications.map((element) {
-            var ownerName = element.owner is UserModel? (element.owner as UserModel).name : (element.owner as InvestigatorModel).name;
-            var targetName = element.target is UserModel? (element.target as UserModel).name : (element.target as InvestigatorModel).name;
-            return SessionCard(
-              texts: [
-                'Session: ${element.session.title}',
-                'From: $ownerName',
-                'To: $targetName',
-                'Message: ${element.message}',
-                element.dateTime
-              ],
-            );
+            return SessionNotifier(element);
           }).toList(),
         ),
         Container(
@@ -54,23 +42,18 @@ class _DashboardState extends State<DashboardWidget> {
       children: <Widget>[
         Carousel(
           items: Api.sessionsNotifications.map((element) {
-            return SessionCard(
-              texts: [
-                element.session.title,
-                element.owner is UserModel? (context.owner as UserModel).name : (context.owner as InvestigatorModel).name,
-                element.target is UserModel? (context.owner as UserModel).name : (context.owner as InvestigatorModel).name,
-                element.message,
-                element.dateTime
-              ],
-            );
+            return SessionNotifier(element);
           }).toList(),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            LiveCard(),
-            Calendar(),
-          ],
+        Flexible(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              LiveCard(),
+              Calendar(),
+            ],
+          ),
         ),
       ],
     );

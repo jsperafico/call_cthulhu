@@ -26,7 +26,7 @@ class _DashboardState extends State<DashboardWidget> {
         Carousel(
           items: Api.sessionsNotifications.map((element) {
             return SessionNotifier(element);
-          }).toList(),
+          }).toList().sublist(0, 1),
         ),
         Container(
           width: double.infinity,

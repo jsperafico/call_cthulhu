@@ -1,7 +1,6 @@
 import 'package:call_cthulhu_app/models/api.dart';
 import 'package:call_cthulhu_app/models/session/investigator_model.dart';
 import 'package:call_cthulhu_app/widgets/components/circle_avatar/circle_text.dart';
-import 'package:call_cthulhu_app/widgets/session/session_card.dart';
 import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
 

@@ -17,10 +17,10 @@ Once that done, is highly recommeded to read [Flutter DevContainer Documentation
 
 ## Screenshots of the App
 
-<img src="screenshots/login.png" width="40%"/>
-<img src="screenshots/dashboard.png" width="40%"/>
-<img src="screenshots/drawer.png" width="40%"/>
-<img src="screenshots/profile.png" width="40%"/>
-<img src="screenshots/sessions.png" width="40%"/>
-<img src="screenshots/settings.png" width="40%"/>
-<img src="screenshots/about.png" width="40%"/>
+<img src="screenshots/login.png" width="40%" style="float:left;"/>
+<img src="screenshots/dashboard.png" width="40%" style="float:left;"/>
+<img src="screenshots/drawer.png" width="40%" style="float:left;"/>
+<img src="screenshots/profile.png" width="40%" style="float:left;"/>
+<img src="screenshots/sessions.png" width="40%" style="float:left;"/>
+<img src="screenshots/settings.png" width="40%" style="float:left;"/>
+<img src="screenshots/about.png" width="40%" style="float:left;"/>

@@ -1,14 +1,14 @@
-import 'package:call_cthulhu_app/models/session/investigator_model.dart';
+import 'package:call_cthulhu_app/models/investigator_model.dart';
 import 'package:call_cthulhu_app/models/session/session_notify_model.dart';
-import 'package:call_cthulhu_app/models/session/user_model.dart';
+import 'package:call_cthulhu_app/models/user_model.dart';
 import 'package:call_cthulhu_app/widgets/components/circle_avatar/circle_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class SessionNotifier extends StatelessWidget {
+class SessionNotification extends StatelessWidget {
   final SessionNotifyModel session;
 
-  SessionNotifier(this.session);
+  SessionNotification(this.session);
 
   @override
   Widget build(BuildContext context) {

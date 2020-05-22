@@ -1,4 +1,4 @@
-import 'package:call_cthulhu_app/models/session/user_model.dart';
+import 'package:call_cthulhu_app/models/user_model.dart';
 
 class InvestigatorModel {
   UserModel user;

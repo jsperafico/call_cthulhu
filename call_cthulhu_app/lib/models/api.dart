@@ -1,7 +1,7 @@
-import 'package:call_cthulhu_app/models/session/investigator_model.dart';
+import 'package:call_cthulhu_app/models/investigator_model.dart';
 import 'package:call_cthulhu_app/models/session/session_model.dart';
 import 'package:call_cthulhu_app/models/session/session_notify_model.dart';
-import 'package:call_cthulhu_app/models/session/user_model.dart';
+import 'package:call_cthulhu_app/models/user_model.dart';
 
 class Api {
   static var usersModel = [
@@ -93,50 +93,65 @@ class Api {
         investigatorsModel.singleWhere((element) => element.name == 'Rock'),
         investigatorsModel.singleWhere((element) => element.name == 'Bad'),
       ],
+      scheduled: DateTime.now(),
     ),
     SessionModel(
-        title: 'Amazing Session Room',
-        description: 'Call of Cthulhu situated on Brazil',
-        keeper: usersModel.singleWhere((element) => element.name == 'Jonathan'),
-        investigators: [
-          investigatorsModel.singleWhere((element) => element.name == 'Luck'),
-          investigatorsModel.singleWhere((element) => element.name == 'Peter'),
-          investigatorsModel.singleWhere((element) => element.name == 'Brock'),
-          investigatorsModel.singleWhere((element) => element.name == 'Bad'),
-        ]),
+      title: 'Amazing Session Room',
+      description: 'Call of Cthulhu situated on Brazil',
+      keeper: usersModel.singleWhere((element) => element.name == 'Jonathan'),
+      investigators: [
+        investigatorsModel.singleWhere((element) => element.name == 'Luck'),
+        investigatorsModel.singleWhere((element) => element.name == 'Peter'),
+        investigatorsModel.singleWhere((element) => element.name == 'Brock'),
+        investigatorsModel.singleWhere((element) => element.name == 'Bad'),
+      ],
+      scheduled: DateTime.now().subtract(Duration(days: 2)),
+    ),
     SessionModel(
-        title: 'Lazy Session Room',
-        description: 'Call of Cthulhu situated on London',
-        keeper: usersModel.singleWhere((element) => element.name == 'Diego'),
-        investigators: [
-          investigatorsModel.singleWhere((element) => element.name == 'Luck'),
-          investigatorsModel.singleWhere((element) => element.name == 'Brock'),
-          investigatorsModel.singleWhere((element) => element.name == 'Ted'),
-          investigatorsModel.singleWhere((element) => element.name == 'Usoop'),
-        ]),
+      title: 'Lazy Session Room',
+      description: 'Call of Cthulhu situated on London',
+      keeper: usersModel.singleWhere((element) => element.name == 'Diego'),
+      investigators: [
+        investigatorsModel.singleWhere((element) => element.name == 'Luck'),
+        investigatorsModel.singleWhere((element) => element.name == 'Brock'),
+        investigatorsModel.singleWhere((element) => element.name == 'Ted'),
+        investigatorsModel.singleWhere((element) => element.name == 'Usoop'),
+      ],
+      scheduled: DateTime.now().add(Duration(days: 5)),
+    ),
+    SessionModel(
+      title: 'Powered Session Room',
+      description: 'Call of Cthulhu situated on Mars',
+      keeper: usersModel.singleWhere((element) => element.name == 'Marcieli'),
+      investigators: [
+        investigatorsModel.singleWhere((element) => element.name == 'Luck'),
+        investigatorsModel.singleWhere((element) => element.name == 'Brock'),
+        investigatorsModel.singleWhere((element) => element.name == 'Ted'),
+        investigatorsModel.singleWhere((element) => element.name == 'Usoop'),
+      ],
+      scheduled: DateTime.now().add(Duration(days: 5)),
+    ),
   ];
 
   static var sessionsNotifications = [
     SessionNotifyModel(
-      session: sessionsModel[0],
-      dateTime: DateTime.now(),
-      owner: sessionsModel[0].keeper,
-      target: sessionsModel[0].investigators[1],
-      message: "You have received during town hall presentation an item. Please check you bag."
-    ),
+        session: sessionsModel[0],
+        dateTime: DateTime.now(),
+        owner: sessionsModel[0].keeper,
+        target: sessionsModel[0].investigators[1],
+        message:
+            "You have received during town hall presentation an item. Please check you bag."),
     SessionNotifyModel(
-      session: sessionsModel[1],
-      dateTime: DateTime.now().subtract(Duration(days: 1)),
-      owner: sessionsModel[1].investigators[1],
-      target: sessionsModel[1].keeper,
-      message: "Please Keeper I need more information."
-    ),
+        session: sessionsModel[1],
+        dateTime: DateTime.now().subtract(Duration(days: 1)),
+        owner: sessionsModel[1].investigators[1],
+        target: sessionsModel[1].keeper,
+        message: "Please Keeper I need more information."),
     SessionNotifyModel(
-      session: sessionsModel[2],
-      dateTime: DateTime.now().subtract(Duration(days: 5)),
-      owner: sessionsModel[2].keeper,
-      target: sessionsModel[2].investigators[1],
-      message: "Please update your profile."
-    ),
+        session: sessionsModel[2],
+        dateTime: DateTime.now().subtract(Duration(days: 5)),
+        owner: sessionsModel[2].keeper,
+        target: sessionsModel[2].investigators[1],
+        message: "Please update your profile."),
   ];
 }

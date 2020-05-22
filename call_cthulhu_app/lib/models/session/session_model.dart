@@ -1,13 +1,14 @@
-import 'package:call_cthulhu_app/models/session/investigator_model.dart';
-import 'package:call_cthulhu_app/models/session/user_model.dart';
+import 'package:call_cthulhu_app/models/investigator_model.dart';
+import 'package:call_cthulhu_app/models/user_model.dart';
 
 class SessionModel {
   String title;
   String description;
   UserModel keeper;
   List<InvestigatorModel> investigators;
+  DateTime scheduled;
 
-  SessionModel({this.keeper, this.title, this.description, this.investigators});
+  SessionModel({this.keeper, this.title, this.description, this.investigators, this.scheduled});
 
   addInvestigator(InvestigatorModel investigator) {
     if (this.investigators == null) {

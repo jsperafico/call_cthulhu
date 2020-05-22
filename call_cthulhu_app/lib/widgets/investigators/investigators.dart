@@ -1,5 +1,5 @@
 import 'package:call_cthulhu_app/models/api.dart';
-import 'package:call_cthulhu_app/models/session/investigator_model.dart';
+import 'package:call_cthulhu_app/models/investigator_model.dart';
 import 'package:call_cthulhu_app/widgets/components/circle_avatar/circle_text.dart';
 import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
@@ -14,39 +14,40 @@ class InvestigatorsWidget extends StatelessWidget {
         .toList();
   }
 
-  void _openModalNewInvestigator(BuildContext conext) {
+  void _openModalNewInvestigator(BuildContext context) {
     showModalBottomSheet(
-        context: conext,
-        builder: (_) {
-          return Card(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                    ),
-                    controller: this.nameController,
+      context: context,
+      builder: (_) {
+        return Card(
+          child: Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'User',
-                    ),
-                    controller: this.userController,
+                  controller: this.nameController,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'User',
                   ),
-                  RaisedButton(
-                    child: Text('Add'),
-                    onPressed: () {
-                      print('${nameController.text} - ${userController.text}');
-                    },
-                  ),
-                ],
-              ),
+                  controller: this.userController,
+                ),
+                RaisedButton(
+                  child: Text('Add'),
+                  onPressed: () {
+                    print('${nameController.text} - ${userController.text}');
+                  },
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   @override

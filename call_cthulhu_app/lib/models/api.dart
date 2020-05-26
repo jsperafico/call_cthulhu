@@ -83,7 +83,7 @@ class Api {
 
   static var sessionsModel = [
     SessionModel(
-      title: 'Super Session Room',
+      title: 'Super Fellas',
       description: 'Call of Cthulhu considering World War II',
       keeper: usersModel.singleWhere((element) => element.name == 'Jonathan'),
       investigators: [
@@ -96,7 +96,7 @@ class Api {
       scheduled: DateTime.now(),
     ),
     SessionModel(
-      title: 'Amazing Session Room',
+      title: 'Amazing Fellas',
       description: 'Call of Cthulhu situated on Brazil',
       keeper: usersModel.singleWhere((element) => element.name == 'Jonathan'),
       investigators: [
@@ -108,7 +108,7 @@ class Api {
       scheduled: DateTime.now().subtract(Duration(days: 2)),
     ),
     SessionModel(
-      title: 'Lazy Session Room',
+      title: 'Lazy Fellas',
       description: 'Call of Cthulhu situated on London',
       keeper: usersModel.singleWhere((element) => element.name == 'Diego'),
       investigators: [
@@ -120,7 +120,7 @@ class Api {
       scheduled: DateTime.now().add(Duration(days: 5)),
     ),
     SessionModel(
-      title: 'Powered Session Room',
+      title: 'Powered by no one',
       description: 'Call of Cthulhu situated on Mars',
       keeper: usersModel.singleWhere((element) => element.name == 'Marcieli'),
       investigators: [

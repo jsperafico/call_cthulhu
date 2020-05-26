@@ -96,7 +96,7 @@ class Api {
       scheduled: DateTime.now(),
     ),
     SessionModel(
-      title: 'Amazing Fellas',
+      title: 'Powered by no one',
       description: 'Call of Cthulhu situated on Brazil',
       keeper: usersModel.singleWhere((element) => element.name == 'Jonathan'),
       investigators: [
@@ -120,7 +120,7 @@ class Api {
       scheduled: DateTime.now().add(Duration(days: 5)),
     ),
     SessionModel(
-      title: 'Powered by no one',
+      title: 'Amazing Fellas',
       description: 'Call of Cthulhu situated on Mars',
       keeper: usersModel.singleWhere((element) => element.name == 'Marcieli'),
       investigators: [

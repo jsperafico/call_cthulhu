@@ -22,6 +22,7 @@ class Calendar extends StatelessWidget {
         headerStyle: HeaderStyle(centerHeaderTitle: true),
         events: this.events,
         onDaySelected: this.onDaySelected,
+        availableGestures: AvailableGestures.none,
       ),
     );
   }

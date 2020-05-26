@@ -37,7 +37,7 @@ class SessionCard extends StatelessWidget {
                   CircleSize.SMALL,
                   value.name,
                 );
-              }).toList(),
+              }).toList()
             ),
           ],
         ),

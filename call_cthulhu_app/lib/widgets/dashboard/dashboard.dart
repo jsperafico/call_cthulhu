@@ -1,8 +1,8 @@
 import 'package:call_cthulhu_app/models/api.dart';
 import 'package:call_cthulhu_app/models/session/session_model.dart';
 import 'package:call_cthulhu_app/widgets/components/calendar/calendar.dart';
+import 'package:call_cthulhu_app/widgets/dashboard/live_card.dart';
 import 'package:call_cthulhu_app/widgets/dashboard/session_notification.dart';
-import 'package:call_cthulhu_app/widgets/session/live_card.dart';
 import 'package:call_cthulhu_app/widgets/session/session_card.dart';
 import 'package:call_cthulhu_app/widgets/welcome.dart';
 import 'package:flutter/material.dart';
@@ -19,41 +19,39 @@ class _DashboardState extends State<DashboardWidget> {
   CalendarController _calendarController;
   Map<DateTime, List> _events = {};
   List<SessionModel> _listSessionOfSelectedDay;
+  SessionModel _liveSession;
 
-  Widget _portrait(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          width: double.infinity,
-          child: LiveCard(),
+  List<Widget> _portrait(BuildContext context) {
+    return [
+      Container(
+        width: double.infinity,
+        child: LiveCard(Api.sessionsModel.firstWhere(
+            (item) => item.scheduled.difference(DateTime.now()).inDays == 0)),
+      ),
+      Container(
+        width: double.infinity,
+        child: Calendar(
+          this._calendarController,
+          this._events,
+          this._onDaySelected,
         ),
-        Container(
-          width: double.infinity,
-          child: Calendar(
-            this._calendarController,
-            this._events,
-            this._onDaySelected,
-          ),
-        ),
-        this._createListSessionCard(context),
-      ],
-    );
+      ),
+      this._createListSessionCard(context),
+    ];
   }
 
-  Widget _landscape(BuildContext context) {
-    return Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Flexible(
-          flex: 1,
+  List<Widget> _landscape(BuildContext context) {
+    return [
+      Flexible(
+        flex: 1,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              LiveCard(),
+              Container(
+                width: double.infinity,
+                child: LiveCard(this._liveSession),
+              ),
               Calendar(
                 this._calendarController,
                 this._events,
@@ -62,12 +60,9 @@ class _DashboardState extends State<DashboardWidget> {
             ],
           ),
         ),
-        Flexible(
-          flex: 1,
-          child: this._createListSessionCard(context),
-        ),
-      ],
-    );
+      ),
+      this._createListSessionCard(context),
+    ];
   }
 
   void _onDaySelected(DateTime day, List titles) {
@@ -82,7 +77,7 @@ class _DashboardState extends State<DashboardWidget> {
     return (this._listSessionOfSelectedDay == null ||
             this._listSessionOfSelectedDay.length == 0)
         ? Container()
-        : Flexible(
+        : Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return SessionCard(this._listSessionOfSelectedDay[index]);
@@ -111,6 +106,10 @@ class _DashboardState extends State<DashboardWidget> {
   void initState() {
     super.initState();
     this._calendarController = CalendarController();
+
+    this._liveSession = Api.sessionsModel.firstWhere(
+        (item) => item.scheduled.difference(DateTime.now()).inDays == 0,
+        orElse: null);
 
     var sessions = Api.sessionsModel.where((item) {
       if (item.scheduled != null) {
@@ -150,9 +149,19 @@ class _DashboardState extends State<DashboardWidget> {
     return Scaffold(
       appBar: WelcomeApp.appBar,
       drawer: WelcomeApp.drawer,
-      body: Orientation.portrait == MediaQuery.of(context).orientation
-          ? _portrait(context)
-          : _landscape(context),
+      body: Flex(
+        direction: Orientation.portrait == MediaQuery.of(context).orientation
+            ? Axis.vertical
+            : Axis.horizontal,
+        mainAxisAlignment:
+            Orientation.portrait == MediaQuery.of(context).orientation
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: Orientation.portrait == MediaQuery.of(context).orientation
+            ? _portrait(context)
+            : _landscape(context),
+      ),
       floatingActionButton: Api.sessionsNotifications.length > 0
           ? FloatingActionButton(
               tooltip: 'Notifications',
